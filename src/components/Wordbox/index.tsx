@@ -5,9 +5,15 @@ interface IWordboxProp {
   word: string;
   onFinish: () => void;
   active: boolean;
+  onMistake: () => void;
 }
 
-const Wordbox: React.FC<IWordboxProp> = ({ word, onFinish, active }) => {
+const Wordbox: React.FC<IWordboxProp> = ({
+  word,
+  onFinish,
+  active,
+  onMistake,
+}) => {
   const [lettersLeft, setLettersLeft] = useState<string>(word);
   const [mistake, setMistake] = useState<boolean>(false);
 
@@ -22,6 +28,7 @@ const Wordbox: React.FC<IWordboxProp> = ({ word, onFinish, active }) => {
         onFinish();
       }
     } else {
+      onMistake();
       setMistake(true);
     }
   };
@@ -33,7 +40,7 @@ const Wordbox: React.FC<IWordboxProp> = ({ word, onFinish, active }) => {
     return () => {
       document.removeEventListener('keyup', handleKeyUp);
     };
-  }, [lettersLeft, active]);
+  }, [lettersLeft, active, onMistake]);
 
   return (
     <div className={mistake ? 'wordbox wordbox--mistake' : 'wordbox'}>

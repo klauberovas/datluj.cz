@@ -20,6 +20,7 @@ const generateWord = (size: number) => {
 
 const Stage = () => {
   const [words, setWords] = useState<string[]>(['jahoda', 'atrapa', 'brynza']);
+  const [numOfErrors, setNumOfErrors] = useState<number>(0);
 
   const handleFinish = () => {
     const newWord = generateWord(6);
@@ -31,9 +32,13 @@ const Stage = () => {
     }
   };
 
+  const handleMistake = () => {
+    setNumOfErrors(numOfErrors + 1);
+  };
+
   return (
     <div className="stage">
-      <div className="stage__mistakes">Chyb: 0</div>
+      <div className="stage__mistakes">Chyb: {numOfErrors}</div>
       <div className="stage__words">
         {words.map((word, index) => (
           <Wordbox
@@ -41,6 +46,7 @@ const Stage = () => {
             key={word}
             onFinish={handleFinish}
             active={index === 0 ? true : false}
+            onMistake={handleMistake}
           />
         ))}
       </div>
