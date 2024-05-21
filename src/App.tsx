@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import Stage from './components/Stage';
 
-const App: React.FC = () => {
+const App: FC = () => {
   return (
     <div className="container">
       <h1>Datlování</h1>

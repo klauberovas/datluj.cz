@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import './style.css';
 
 interface IWordboxProp {
@@ -8,12 +8,7 @@ interface IWordboxProp {
   onMistake: () => void;
 }
 
-const Wordbox: React.FC<IWordboxProp> = ({
-  word,
-  onFinish,
-  active,
-  onMistake,
-}) => {
+const Wordbox: FC<IWordboxProp> = ({ word, onFinish, active, onMistake }) => {
   const [lettersLeft, setLettersLeft] = useState<string>(word);
   const [mistake, setMistake] = useState<boolean>(false);
 

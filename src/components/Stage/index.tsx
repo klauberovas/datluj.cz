@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import Wordbox from '../Wordbox';
 import wordList from '../../word-list';
 import './style.css';
@@ -18,7 +18,7 @@ const generateWord = (size: number) => {
   return words[wordIndex];
 };
 
-const Stage = () => {
+const Stage: FC = () => {
   const [words, setWords] = useState<string[]>(['jahoda', 'atrapa', 'brynza']);
   const [numOfErrors, setNumOfErrors] = useState<number>(0);
 
