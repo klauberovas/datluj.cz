@@ -5,9 +5,10 @@ import './style.css';
 
 // TODO: temporary disable function - remove next line when you start using it
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-const generateWord = (size: number) => {
-  const sizeIndex =
-    size === undefined ? Math.floor(Math.random() * wordList.length) : size - 3;
+const generateWord = (size?: number) => {
+  const sizeIndex = !size
+    ? Math.floor(Math.random() * wordList.length)
+    : size - 3;
 
   if (sizeIndex < 0 || sizeIndex >= wordList.length) {
     return null;
@@ -24,10 +25,8 @@ const Stage: FC = () => {
 
   const handleFinish = () => {
     const newWord = generateWord(6);
-    if (newWord !== null) {
-      const newArray = [...words];
-      newArray.shift();
-      newArray.push(newWord);
+    if (newWord) {
+      const newArray = [...words.slice(1), newWord];
       setWords(newArray);
     }
   };
@@ -45,7 +44,7 @@ const Stage: FC = () => {
             word={word}
             key={word}
             onFinish={handleFinish}
-            active={index === 0 ? true : false}
+            active={index === 0}
             onMistake={handleMistake}
           />
         ))}
